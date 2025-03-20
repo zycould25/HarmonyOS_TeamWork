@@ -1,4 +1,4 @@
-
+import router from '@ohos.router';
 
 @Entry
 @Component
@@ -34,6 +34,13 @@ struct Index {
         )
 
         TabContent(){
+
+            Button('登录').onClick(()=>{
+              router.pushUrl({
+                url:'pages/LogIn'
+              })
+            })
+
 
         }.tabBar(SubTabBarStyle.of('我的')
           .labelStyle({

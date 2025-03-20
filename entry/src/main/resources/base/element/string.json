@@ -11,6 +11,23 @@
     {
       "name": "EntryAbility_label",
       "value": "智能停车场管理系统"
+    },
+    {
+      "name": "loginTips",
+      "value": "please input your account name"
+    },
+    {
+      "name": "passwordTips",
+      "value": "please input your password"
+    },
+    {
+      "name": "ForgetPassword",
+      "value": "Forget password"
+    },
+
+    {
+      "name": "GoToRegister",
+      "value": "Go to register"
     }
 
   ]

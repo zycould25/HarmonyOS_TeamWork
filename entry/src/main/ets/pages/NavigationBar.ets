@@ -4,7 +4,7 @@ import {hilog} from  '@kit.PerformanceAnalysisKit'
 @Entry
 @Component
 @Preview
-struct ButtomTab {//底部导航栏
+struct ButtonTab {//底部导航栏
   @State message: string = '智能停车场管理系统 '; //目前还不知道这条语句有什么用，或许以后有大用？
 
   @State currentIndex: number = 0;//动态标识当前页
@@ -32,7 +32,7 @@ struct ButtomTab {//底部导航栏
   }
 
   @Builder
-  tabContenBuilder(text: string, index: number, selectedImg: Resource, normalImg:Resource){
+  tabContentBuilder(text: string, index: number, selectedImg: Resource, normalImg:Resource){
     TabContent(){
       Row(){
         Text(text)
@@ -51,12 +51,12 @@ struct ButtomTab {//底部导航栏
     Tabs({
       barPosition:BarPosition.End,
       controller:this.tabsController //绑定当前控制器
-  }){//调用三次tabContenBuilder,创建三个标签页
-      this.tabContenBuilder("首页",
+  }){//调用三次tabContentBuilder,创建三个标签页
+      this.tabContentBuilder("首页",
         0,$r('app.media.activeHome'),$r('app.media.home'))
-      this.tabContenBuilder("停车",
+      this.tabContentBuilder("停车",
         1,$r('app.media.activePark'),$r('app.media.park'))
-      this.tabContenBuilder("我的",
+      this.tabContentBuilder("我的",
         2,$r('app.media.activePeople'),$r('app.media.people'))
     }
     .width('100%')

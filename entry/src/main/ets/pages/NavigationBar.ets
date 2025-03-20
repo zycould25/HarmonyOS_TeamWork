@@ -50,8 +50,8 @@ struct ButtomTab {//底部导航栏
   build() {
     Tabs({
       barPosition:BarPosition.End,
-      controller:this.tabsController
-  }){
+      controller:this.tabsController //绑定当前控制器
+  }){//调用三次tabContenBuilder,创建三个标签页
       this.tabContenBuilder("首页",
         0,$r('app.media.activeHome'),$r('app.media.home'))
       this.tabContenBuilder("停车",
@@ -62,7 +62,7 @@ struct ButtomTab {//底部导航栏
     .width('100%')
     .backgroundColor('#F34F5')
     .barHeight(52)
-    .barMode(BarMode.Fixed)
+    .barMode(BarMode.Fixed)//固定模式，标签栏等分屏幕宽度
     .onAnimationStart((index: number, targetIndex: number) =>{
       hilog.info(0x0000,'index',index.toString());
       this.currentIndex = targetIndex;

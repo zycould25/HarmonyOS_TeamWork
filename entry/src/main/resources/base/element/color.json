@@ -3,6 +3,37 @@
     {
       "name": "start_window_background",
       "value": "#FFFFFF"
-    }
+    },
+
+    {
+      "name": "starBlue",
+      "value": "#93b5cf"
+    },
+
+      {
+        "name": "ChunMeiHong",
+        "value": "#f1939c"
+      },
+      {
+        "name": "SongShiLv",
+        "value": "#0E6C63"
+      },
+      {
+        "name": "ZhangHuaHong",
+        "value": "#ec2d7a"
+      },
+      {
+        "name": "TealGreen",
+        "value": "#13D285"
+      },
+      {
+        "name": "JieHuaZi",
+        "value": "#983680"
+      },
+      {
+        "name": "BoHeLv",
+        "value": "#67C97F"
+      }
+
   ]
 }

@@ -1,10 +1,13 @@
-import router from '@ohos.router';
+
 import {hilog} from  '@kit.PerformanceAnalysisKit'
+import {frontPage} from '../component/TabsComponent'
+import {parkingPage} from '../component/Parking'
+import {UserCenterPage} from '../component/UserCenter'
 
 @Entry
 @Component
 @Preview
-struct ButtonTab {//底部导航栏
+struct BottomTab {//底部导航栏
   @State message: string = '智能停车场管理系统 '; //目前还不知道这条语句有什么用，或许以后有大用？
 
   @State currentIndex: number = 0;//动态标识当前页
@@ -20,7 +23,7 @@ struct ButtonTab {//底部导航栏
       Text(title)
         .margin({top: 4 })
         .fontSize(10)
-        .fontColor(this.currentIndex === index ? '#3388ff' : '#E6000000')
+        .fontColor(this.currentIndex === index ? $r("app.color.ChunMeiHong") : $r("app.color.SongShiLv"))
     }
     .justifyContent(FlexAlign.Center)//
     .height(52)
@@ -35,9 +38,14 @@ struct ButtonTab {//底部导航栏
   tabContentBuilder(text: string, index: number, selectedImg: Resource, normalImg:Resource){
     TabContent(){
       Row(){
-        Text(text)
-          .height(300)
-          .fontSize(30)
+        if (index == 0){
+          frontPage()
+        } else if(index == 1){
+          parkingPage()
+        } else if(index ==2 ){
+          UserCenterPage()
+        }
+
       }
       .width('100%')
       .justifyContent(FlexAlign.Center)
@@ -69,4 +77,3 @@ struct ButtonTab {//底部导航栏
     })
   }
 }
-

@@ -1,24 +1,25 @@
 {
   "app": {
     "signingConfigs": [
+
       {
-        "name": "default",
+        "name": "neo",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.cer",
-          "storePassword": "0000001B889A6C32029CBD98189E246E39E18B02709693FB4A36A5725C66AD50B18342649E7DD0B939BA53",
+          "certpath": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.cer",
+          "storePassword": "0000001AAC39915DC524B4CE80853B59DDB690E0DC7437EB6BF62D4BFB2EA6F1B8E3EADF45AF4BED82AF",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BCDF6272205BA7888F1B708BD1DF963613306317B475CA903F664FD6032D2894D066F8630524DB7",
-          "profile": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.p7b",
+          "keyPassword": "0000001A2F6CC7E4DFF59E1D939E146050780FA4B4C155D4AF21AA2CBCBF0E82D3A2A437D8D4CC3D7E87",
+          "profile": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.p12"
+          "storeFile": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
         }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "default",
+        "signingConfig": "neo",
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

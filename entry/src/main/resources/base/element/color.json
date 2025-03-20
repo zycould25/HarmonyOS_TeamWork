@@ -10,14 +10,15 @@
       "value": "#93b5cf"
     },
 
-      {
-        "name": "ChunMeiHong",
-        "value": "#f1939c"
-      },
-      {
-        "name": "SongShiLv",
-        "value": "#0E6C63"
-      },
+          {
+            "name": "ChunMeiHong",
+            "value": "#f1939c"
+          },
+          {
+            "name": "SongShiLv",
+            "value": "#0E6C63"
+          },
+
       {
         "name": "ZhangHuaHong",
         "value": "#ec2d7a"

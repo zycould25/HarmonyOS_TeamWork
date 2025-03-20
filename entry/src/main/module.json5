@@ -20,7 +20,7 @@
         "icon": "$media:ico",
         "label": "$string:EntryAbility_label",
         "startWindowIcon": "$media:ico",
-        "startWindowBackground": "$color:start_window_background",
+        "startWindowBackground": "$color:write",
         "exported": true,
         "skills": [
           {

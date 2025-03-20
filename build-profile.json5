@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\halfz\\.ohos\\config\\default_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.cer",
-          "storePassword": "0000001B39D74504FB8E2944133939460A02EAC7A612D31C41109671421F4411C092F83BA3C742A7979E5B",
+          "certpath": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.cer",
+          "storePassword": "0000001B889A6C32029CBD98189E246E39E18B02709693FB4A36A5725C66AD50B18342649E7DD0B939BA53",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BC2DFD3CAECA13A294C11931812EFB4DB15135DB8E0B501149DD4A89F3CF4329B0297DF61208E1E",
-          "profile": "C:\\Users\\halfz\\.ohos\\config\\default_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p7b",
+          "keyPassword": "0000001BCDF6272205BA7888F1B708BD1DF963613306317B475CA903F664FD6032D2894D066F8630524DB7",
+          "profile": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\halfz\\.ohos\\config\\default_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
+          "storeFile": "C:\\Users\\86188\\.ohos\\config\\default_HarmonyParkingManagement_CzEyAocZweZrrQlDH1z4WN3My3zt9o5IucR_9m-mang=.p12"
         }
       }
     ],

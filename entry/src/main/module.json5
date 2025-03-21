@@ -19,7 +19,7 @@
         "description": "$string:EntryAbility_desc",
         "icon": "$media:ico",
         "label": "$string:EntryAbility_label",
-        "startWindowIcon": "$media:ico",
+        "startWindowIcon": "$media:background", //启动应用后的都一个图片，还不能删
         "startWindowBackground": "$color:write",
         "exported": true,
         "skills": [

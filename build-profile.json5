@@ -1,7 +1,6 @@
 {
   "app": {
     "signingConfigs": [
-
       {
         "name": "neo",
         "type": "HarmonyOS",
@@ -14,12 +13,25 @@
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
         }
+      },
+      {
+        "name": "Mac",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/chapaofan/.ohos/config/Mac_HarmonyOS_TeamWork_119HAesJ2TX-JtIqQrMmGv9sf9bRW8MoP3QWUhMvpzs=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BA4019C87860495B77ADB4BC1FC3C39B7F23E54D3646C4D6405370AD477AE268FE9399955292C6C",
+          "profile": "/Users/chapaofan/.ohos/config/Mac_HarmonyOS_TeamWork_119HAesJ2TX-JtIqQrMmGv9sf9bRW8MoP3QWUhMvpzs=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/chapaofan/.ohos/config/Mac_HarmonyOS_TeamWork_119HAesJ2TX-JtIqQrMmGv9sf9bRW8MoP3QWUhMvpzs=.p12",
+          "storePassword": "0000001B66F11933C899E179B5337A04B2F1EAE1409A85CF6CD6ED19EDB5D0E053560683ADF5D5D2C14BFF"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "neo",
+        "signingConfig": "Mac", //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成neo ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

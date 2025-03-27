@@ -1,6 +1,7 @@
 {
   "src": [
     "pages/NavigationBar",
-    "pages/LogIn"
+    "pages/LogIn",
+    "pages/RegisterPage"
   ]
 }

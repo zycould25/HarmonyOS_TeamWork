@@ -1,3 +1,4 @@
+
 import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
 
@@ -39,7 +40,7 @@ struct LogIn{
               })
           } else {
             promptAction.showToast({
-              message:'您输入了错误的账号或者密码'
+              message:$r("app.string.errorInput")
             })
           }
 
@@ -48,12 +49,14 @@ struct LogIn{
       Row({space:10}) { //忘记密码和注册提示
         Text($r("app.string.ForgetPassword"))
           .onClick(()=>{
-            //待实现忘记密码
+
           })
         Text('|')
         Text($r("app.string.GoToRegister"))
           .onClick(()=>{
-            //待实现注册
+            router.pushUrl({
+              url:'pages/RegisterPage'
+            })
           })
       }
     }

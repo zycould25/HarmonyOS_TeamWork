@@ -1,11 +1,10 @@
 import { User} from '../model/Users'
 
+@Preview
 @Component
+@Entry
 struct Register{
-  @Prop registerUsername:String = "huaweiUser"
-  @Prop registerPassword:String = "12345678"
-
   build() {
-
+      Text("hello world");
   }
 }

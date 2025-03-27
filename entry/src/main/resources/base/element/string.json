@@ -28,7 +28,12 @@
     {
       "name": "GoToRegister",
       "value": "Go to register"
+    },
+    {
+      "name": "errorInput",
+      "value": "您输入了错误的账号或者密码"
     }
+
 
   ]
 }

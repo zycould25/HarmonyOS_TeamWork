@@ -2,6 +2,7 @@
   "src": [
     "pages/NavigationBar",
     "pages/LogIn",
-    "pages/RegisterPage"
+    "pages/RegisterPage",
+    "pages/ForgetPassword"
   ]
 }

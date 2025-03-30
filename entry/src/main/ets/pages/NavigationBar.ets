@@ -45,7 +45,6 @@ struct BottomTab {//底部导航栏
         } else if(index ==2 ){
           UserCenterPage()
         }
-
       }
       .width('100%')
       .justifyContent(FlexAlign.Center)

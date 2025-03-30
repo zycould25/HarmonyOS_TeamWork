@@ -5,7 +5,7 @@ import router from '@ohos.router';
 
 @Component
 export struct UserCenterPage {
-  @State private  fileName: string = "/UserInfo.json";
+  //@State private  fileName: string = "/UserInfo.json";
   build() {
     Button("登录").onClick(()=>{
         router.pushUrl({

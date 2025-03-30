@@ -66,7 +66,10 @@ struct LogIn {
       // 辅助功能行
       Row({ space: 10 }) {
         Text($r("app.string.ForgetPassword"))
-          .onClick(() => this.showPasswordReset())
+          .onClick(() => {
+            router.pushUrl({url: 'pages/ForgetPassword' })
+          })
+
 
         Text('|')
 

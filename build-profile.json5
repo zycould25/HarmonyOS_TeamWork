@@ -31,7 +31,7 @@
     "products": [
       {
         "name": "default",
-        "signingConfig": "neo", //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成neo ，其他人的电脑改为自己的相应的signingConfigs
+        "signingConfig": "Mac", //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成neo ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

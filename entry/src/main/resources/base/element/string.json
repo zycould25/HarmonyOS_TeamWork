@@ -182,6 +182,10 @@
     {
       "name": "sendVerificationCode",
       "value": "发送验证码"
+    },
+    {
+      "name": "logout",
+      "value": "退出登录"
     }
 
 

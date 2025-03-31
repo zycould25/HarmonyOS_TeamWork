@@ -34,7 +34,31 @@
       {
         "name": "BoHeLv",
         "value": "#67C97F"
-      }
+      },
+    {
+      "name": "primary",
+      "value": "#FF6B6B"
+    },
+    {
+      "name": "secondary",
+      "value": "#FF9F43"
+    },
+    {
+      "name": "background",
+      "value": "#F5F6FA"
+    },
+    {
+      "name": "text_primary",
+      "value": "#2D3436"
+    },
+    {
+      "name": "text_secondary",
+      "value": "#636E72"
+    },
 
+    {
+      "name": "divider",
+      "value": "#10aec2"
+    }
   ]
 }

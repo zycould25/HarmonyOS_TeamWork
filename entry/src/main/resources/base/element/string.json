@@ -186,8 +186,16 @@
     {
       "name": "logout",
       "value": "退出登录"
+    },
+
+
+    {
+      "name": "login_now",
+      "value": "立即登录"
+    },
+    {
+      "name": "login_prompt",
+      "value": "立即登录享受完整服务"
     }
-
-
   ]
 }

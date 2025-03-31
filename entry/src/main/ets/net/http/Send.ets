@@ -1,5 +1,5 @@
 import {http} from '@kit.NetworkKit';
-import {BusinessError} from '@kit.BasicServicesKit'
+
 
 export function HttpUtil(rul:string, method:http.RequestMethod, requestData:string){
   const httpRequest = http.createHttp();//新建一个对象

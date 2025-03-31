@@ -2,19 +2,6 @@
   "app": {
     "signingConfigs": [
       {
-        "name": "neo",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.cer",
-          "storePassword": "0000001AAC39915DC524B4CE80853B59DDB690E0DC7437EB6BF62D4BFB2EA6F1B8E3EADF45AF4BED82AF",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001A2F6CC7E4DFF59E1D939E146050780FA4B4C155D4AF21AA2CBCBF0E82D3A2A437D8D4CC3D7E87",
-          "profile": "C:\\Users\\halfz\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\half\\.ohos\\config\\neo_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
-        }
-      },
-      {
         "name": "Mac",
         "type": "HarmonyOS",
         "material": {
@@ -26,12 +13,26 @@
           "storeFile": "/Users/chapaofan/.ohos/config/Mac_HarmonyOS_TeamWork_119HAesJ2TX-JtIqQrMmGv9sf9bRW8MoP3QWUhMvpzs=.p12",
           "storePassword": "0000001B66F11933C899E179B5337A04B2F1EAE1409A85CF6CD6ED19EDB5D0E053560683ADF5D5D2C14BFF"
         }
+      },
+      {
+        "name": "1240P",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.cer",
+          "storePassword": "0000001BFDEAB0209DFE8AF608FD4FCC01079661A54D162011A7C19981D653ADD92B7D0BD9782AE2AC5298",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BE95939F5D7FB87E0DEE97AD8FD3E5CD8EED74D2501ABF181D31905B1DF8C1B26A4B210187AA81A",
+          "profile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "Mac", //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成neo ，其他人的电脑改为自己的相应的signingConfigs
+        "signingConfig": "1240P",
+        //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

@@ -124,12 +124,13 @@ struct RegisterPage {
         return;
       }
 
-      // 创建新用户（包含手机号）
+      // 创建新用户（包含手机号和初始积分）
       const newUser = new User(
         this.username,
         this.password,
-        this.phoneNumber,  // 保存手机号
-        ""  // 头像字段
+        this.phoneNumber,
+        0,  // 初始积分设为0
+        ""
       );
 
       const userId = await this.dbManager.addUser(newUser);

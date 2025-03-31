@@ -66,11 +66,13 @@ struct ForgetPassword {
         return;
       }
 
+      // 创建更新后的用户对象（保留原积分和头像）
       const updatedUser = new User(
         user.userName,
-        this.Password,
+        this.Password,       // 新密码
         user.phoneNumber,
-        user.profile
+        user.score,          // 继承原积分
+        user.profile         // 原头像
       );
 
       const success = await this.dbManager.updateUser(updatedUser);
@@ -85,7 +87,6 @@ struct ForgetPassword {
       promptAction.showToast({ message: $r("app.string.operationFailed") });
     }
   }
-
   // 输入验证
   private validateInput(): boolean {
     if (!this.UserName.trim()) {

@@ -21,7 +21,8 @@ export struct UserCenterPage {
 
         Text(`手机号: ${this.currentUser.phoneNumber || '未绑定'}`)
           .fontSize(16)
-
+        Text(`会员积分：${this.currentUser.score}`)
+          .fontSize(16)
 
         Button($r("app.string.logout"))
           .width('60%')

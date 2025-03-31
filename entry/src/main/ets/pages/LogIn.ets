@@ -1,6 +1,5 @@
 import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
-import User from '../model/Users'
 import { UserDBManager } from '../dataBase/localDB'
 
 @Entry
@@ -84,7 +83,7 @@ struct LogIn {
   }
 
   // 处理登录逻辑
-  
+
   private async handleLogin() {
     if (!this.validateInput()) return;
 
@@ -129,10 +128,5 @@ struct LogIn {
       console.error("Navigation failed:", e);
       promptAction.showToast({ message: $r("app.string.navigationError") });
     }
-  }
-
-  // 显示密码重置提示
-  private showPasswordReset() {
-    promptAction.showToast({ message: $r("app.string.resetPasswordHint") });
   }
 }

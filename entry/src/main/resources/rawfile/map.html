@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://webapi.amap.com/maps?v=2.0&key=YOUR_AMAP_KEY"></script>
+    <style>
+        #mapContainer { width: 100%; height: 100vh; }
+    </style>
+</head>
+<body>
+<div id="mapContainer"></div>
+<script>
+    let map;
+    let markers = [];
+
+    window.onmessage = (e) => {
+      const { type, data } = e.data;
+      switch(type) {
+        case 'init':
+          AMapLoader.load({
+            key: data.key,
+            version: "2.0"
+          }).then(initMap);
+          break;
+
+        case 'location':
+          centerMap(data.lng, data.lat);
+          addNearbyParks(data.lng, data.lat);
+          break;
+
+        case 'search':
+          searchPark(data.keyword);
+          break;
+
+        case 'navigate':
+          openNavigation();
+          break;
+      }
+    };
+
+    function initMap() {
+      map = new AMap.Map('mapContainer', {
+        zoom: 15,
+        resizeEnable: true
+      });
+    }
+
+    function centerMap(lng, lat) {
+      map.setCenter([lng, lat]);
+      new AMap.Marker({
+        position: [lng, lat],
+        content: '<div class="my-location"></div>'
+      }).addTo(map);
+    }
+
+    function addNearbyParks(lng, lat) {
+      // 调用高德POI搜索接口
+      AMap.plugin('AMap.PlaceSearch', () => {
+        const placeSearch = new AMap.PlaceSearch({
+          type: '停车场',
+          pageSize: 20
+        });
+
+        placeSearch.searchNearBy('', [lng, lat], 2000, (status, result) => {
+          if (status === 'complete') {
+            clearMarkers();
+            result.poiList.pois.forEach(poi => {
+              const marker = new AMap.Marker({
+                position: poi.location,
+                content: createMarkerContent(poi)
+              });
+              marker.on('click', () => {
+                window.parent.postMessage(JSON.stringify({
+                  type: 'parkClick',
+                  data: poi
+                }), '*');
+              });
+              markers.push(marker);
+              map.add(marker);
+            });
+          }
+        });
+      });
+    }
+
+    function createMarkerContent(poi) {
+      return `
+        <div class="park-marker">
+          <div class="price">${poi.name}</div>
+          <div class="spots">剩余车位：${Math.floor(Math.random()*50)}</div>
+        </div>
+      `;
+    }
+
+    function clearMarkers() {
+      markers.forEach(marker => map.remove(marker));
+      markers = [];
+    }
+
+    function searchPark(keyword) {
+      // 实现搜索逻辑
+    }
+
+    function openNavigation() {
+      // 调用高德导航
+    }
+</script>
+</body>
+</html>

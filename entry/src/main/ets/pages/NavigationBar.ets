@@ -3,13 +3,15 @@ import {hilog} from  '@kit.PerformanceAnalysisKit'
 import {frontPage} from '../component/TabsComponent'
 import {parkingPage} from '../component/Parking'
 import {UserCenterPage} from '../component/UserCenter'
+import { bundleManager } from '@kit.AbilityKit';
+import App from '@system.app';
 
 @Entry
 @Component
 @Preview
 struct BottomTab {//底部导航栏
   @State message: string = '智能停车场管理系统 '; //目前还不知道这条语句有什么用，或许以后有大用？
-
+  @State appid:string = ""
   @State currentIndex: number = 0;//动态标识当前页
   private  tabsController: TabsController = new TabsController();
 
@@ -75,4 +77,12 @@ struct BottomTab {//底部导航栏
       this.currentIndex = targetIndex;
     })
   }
+  // aboutToAppear(): void {
+  //   let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE_INFO;
+  //   let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag)
+  //   let appId = bundleInfo.signatureInfo.appId;
+  //   this.appid=appId
+  //   console.log(appId)
+  // }
+
 }

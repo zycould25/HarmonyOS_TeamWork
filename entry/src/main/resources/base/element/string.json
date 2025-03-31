@@ -196,6 +196,10 @@
     {
       "name": "login_prompt",
       "value": "立即登录享受完整服务"
+    },
+    {
+      "name": "Harmony_navi_permission_reason",
+      "value": "高德地图"
     }
   ]
 }

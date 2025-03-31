@@ -84,29 +84,24 @@ struct LogIn {
   }
 
   // 处理登录逻辑
+  
   private async handleLogin() {
     if (!this.validateInput()) return;
 
     try {
-      // 从数据库查询用户
-      if (!this.dbManager) {
-        return;
-      }
+      if (!this.dbManager) return;
       const user = await this.dbManager.getUserByName(this.username);
 
-      if (!user) {
-        promptAction.showToast({ message: $r("app.string.userNotFound") });
-        return;
-      }
-
-      // 验证密码
-      if (user.passWord === this.password) {
+      if (user?.passWord === this.password) {
+        // 保存登录状态和用户信息
+        AppStorage.setOrCreate('isLoggedIn', true);
+        AppStorage.setOrCreate('currentUser', user);
         await this.redirectToMainPage();
       } else {
         promptAction.showToast({ message: $r("app.string.wrongPassword") });
       }
     } catch (e) {
-      console.error("Login failed:", e);
+      console.error("Login error:", e);
       promptAction.showToast({ message: $r("app.string.loginFailed") });
     }
   }

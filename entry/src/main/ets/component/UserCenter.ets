@@ -1,38 +1,48 @@
-import { fileIo } from '@kit.CoreFileKit';
-import { common } from '@kit.AbilityKit';
-import { buffer } from '@kit.ArkTS';
-import router from '@ohos.router';
+import { router } from "@kit.ArkUI"
+
+import User  from '../model/Users'
 
 @Component
 export struct UserCenterPage {
-  //@State private  fileName: string = "/UserInfo.json";
-  build() {
-    Button("登录").onClick(()=>{
-        router.pushUrl({
-          url:"pages/LogIn"
-        })
+  @StorageLink('isLoggedIn') isLoggedIn: boolean = false;
+  @StorageLink('currentUser') currentUser: User | null = null;
 
-    })
+  build() {
+    Column({ space: 12 }) {
+      if (this.isLoggedIn && this.currentUser) {
+        // 用户信息展示
+        Image($r("app.media.profile")) // 用户头像
+          .width(80)
+          .margin({ bottom: 16 })
+
+        Text(this.currentUser.userName)
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+
+        Text(`手机号: ${this.currentUser.phoneNumber || '未绑定'}`)
+          .fontSize(16)
+
+
+        Button($r("app.string.logout"))
+          .width('60%')
+          .margin({ top: 30 })
+          .onClick(() => {
+            // 清除登录状态
+            AppStorage.set('isLoggedIn', false);
+            AppStorage.set('currentUser', null);
+            router.back(); // 返回登录页或首页
+          })
+      } else {
+        // 未登录状态显示登录按钮
+        Button($r("app.string.login"))
+          .width('60%')
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/LogIn' });
+          })
+      }
+    }
+    .width('100%')
+    .padding(20)
+    .alignItems(HorizontalAlign.Center)
   }
-  // private createNewFile(info: string): number {
-  //   // 判断参数都能允许为空
-  //   if (info == null) {
-  //     console.info("参数不能为空");
-  //     return 0;
-  //   }
-  //   // 获取应用文件路径
-  //   let context = getContext(this) as common.UIAbilityContext;
-  //   let filesDir = context.filesDir;
-  //   // 新建并打开文件
-  //   let file = fileIo.openSync(filesDir.concat(this.fileName), fileIo.OpenMode.WRITE_ONLY | fileIo.OpenMode.CREATE);
-  //   // 将集合转换成json序列化对象存储到文件中
-  //   let writeLen = fileIo.writeSync(file.fd, info);
-  //   console.info("字符串长度: " + writeLen);
-  //   // 从文件读取一段内容
-  //   console.info(filesDir)
-  //   // 关闭文件
-  //   fileIo.closeSync(file);
-  //   // 返回写入长度
-  //   return writeLen;
-  // }
 }

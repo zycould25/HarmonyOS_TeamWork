@@ -74,9 +74,15 @@ export class UserDBManager {
    * @param user 用户对象
    * @returns Promise<number> 返回插入的用户ID（失败返回-1）
    */
-  async addUser(user: User): Promise<number> { //十分的方便啊，你只需要传入一个我定义好了的User实例就可以将新用户加入数据库
+  async addUser(user: User): Promise<number> {//十分的方便啊，你只需要传入一个我定义好了的User实例就可以将新用户加入数据库
     try {
-      // 构建插入数据
+      // 1. 前置校验：检查用户名是否已存在
+      const existingUser = await this.getUserByName(user.userName);
+      if (existingUser !== null) {
+        promptAction.showToast({ message: '用户名已被使用' });
+        return -1; // 提前终止，避免插入
+      }
+      // 2. 构建插入数据
       const values: relationalStore.ValuesBucket = {
         userName: user.userName,
         passWord: user.passWord,
@@ -84,18 +90,31 @@ export class UserDBManager {
         score: user.score,
         profile: user.profile
       };
-
-      // 执行插入操作
+      // 3. 执行插入
       const insertId = await this.store.insert('users', values);
-      console.log('User add success')
-      //promptAction.showToast({ message: '用户添加成功' });
+      promptAction.showToast({ message: '用户添加成功' });
       return insertId;
     } catch (e) {
-      promptAction.showToast({ message: '用户添加失败' });
+      // 4. 处理唯一性约束异常（防止并发冲突）
+      if (e.code === 201) { // 201 是鸿蒙的唯一性错误码
+        promptAction.showToast({ message: '用户名已被使用' });
+      } else {
+        promptAction.showToast({ message: '用户添加失败' });
+      }
       console.error('Add user error:', JSON.stringify(e));
       return -1;
     }
   }
+
+/*常见系统错误码参考
+  201	BUSINESS_ERROR_USER_CANCEL	用户主动取消操作	无需处理，记录日志即可
+  401	BUSINESS_ERROR_PARAM_CHECK	参数错误（如无效的context）	检查传入参数合法性
+  801	BUSINESS_ERROR_HARDWARE_UNSUPPORTED	设备不支持该功能	提示用户或隐藏相关功能入口
+  12100003	ERROR_PERMISSION_DENIED	权限被拒绝	引导用户前往设置页授权
+*/
+
+
+
 
   /**
    * 删除用户（根据用户名）

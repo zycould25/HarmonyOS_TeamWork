@@ -7,9 +7,7 @@ import { UserDBManager } from '../dataBase/localDB'
 struct LogIn {
   @State username: string = "";  // 使用string类型更规范
   @State password: string = "";
-
   @State private dbManager: UserDBManager | null = null;
-
   @State deleteUser:string = ""
 
   // 页面初始化时获取数据库实例

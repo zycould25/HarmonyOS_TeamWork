@@ -42,8 +42,7 @@ export class UserDBManager {
     try {
       // 获取或创建数据库连接
       this.store = await relationalStore.getRdbStore(getContext(), this.config);
-
-      // 创建核心用户表（如果不存在）
+      // 创建用户表（如果不存在）
       await this.store.executeSql(`
         CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -84,14 +83,13 @@ export class UserDBManager {
         score: user.score,
         profile: user.profile
       };
-
       // 执行插入操作
       const insertId = await this.store.insert('users', values);
       console.log('User add success')
       //promptAction.showToast({ message: '用户添加成功' });
       return insertId;
     } catch (e) {
-      promptAction.showToast({ message: '用户添加失败' });
+      //promptAction.showToast({ message: '用户添加失败' });
       console.error('Add user error:', JSON.stringify(e));
       return -1;
     }
@@ -107,7 +105,6 @@ export class UserDBManager {
       // 构建查询条件
       const predicates = new relationalStore.RdbPredicates('users');
       predicates.equalTo('userName', userName);
-
       // 执行删除并获取影响行数
       const rows = await this.store.delete(predicates);
       if (rows > 0) {
@@ -132,13 +129,12 @@ export class UserDBManager {
       // 构建查询条件
       const predicates = new relationalStore.RdbPredicates('users');
       predicates.equalTo('userName', user.userName);
-
       // 构建更新字段（不更新用户名）
       const values: relationalStore.ValuesBucket = {
         passWord: user.passWord,
         phoneNumber: user.phoneNumber,
         profile: user.profile,
-        score: user.score  // 更新积分
+        score: user.score
       };
 
       const rows = await this.store.update(values, predicates);
@@ -169,14 +165,13 @@ export class UserDBManager {
         ['userName', 'passWord', 'phoneNumber', 'score', 'profile']);
 
       if (result.rowCount <= 0) return null;
-
       // 读取第一条结果
       result.goToFirstRow();
       return new User(
         result.getString(result.getColumnIndex('userName')),
         result.getString(result.getColumnIndex('passWord')),
         result.getString(result.getColumnIndex('phoneNumber')),
-        result.getDouble(result.getColumnIndex('score')), // 读取积分
+        result.getDouble(result.getColumnIndex('score')),
         result.getString(result.getColumnIndex('profile'))
       );
     } catch (e) {
@@ -193,10 +188,8 @@ export class UserDBManager {
     const users: User[] = [];
     try {
       const predicates = new relationalStore.RdbPredicates('users');
-      // 查询所有记录
-      const result = await this.store.query(predicates,
+      const result = await this.store.query(predicates,                    // 查询所有记录
         ['userName', 'passWord', 'phoneNumber', 'score', 'profile']);
-
       if (result.rowCount <= 0) return users;
 
       // 遍历结果集

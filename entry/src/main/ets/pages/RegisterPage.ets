@@ -23,26 +23,6 @@ struct RegisterPage {
     }
   }
 
-  // 倒计时控制
-  private startCountdown() {
-    if (this.countdown > 0) return;
-
-    this.countdown = 120;
-    this.timerId = setInterval(() => {
-      if (this.countdown > 0) {
-        this.countdown -= 1;
-      } else {
-        clearInterval(this.timerId);
-      }
-    }, 1000);
-  }
-
-  // 验证码校验
-  private confirmVerificationCode(): boolean {
-    // TODO: 实际应调用服务端验证，临时模拟验证码为123456
-    return this.verificationCode === "123456";
-  }
-
   build() {
     Column({ space: 15 }) {
       Text($r("app.string.registerTitle"))
@@ -106,6 +86,26 @@ struct RegisterPage {
         })
     }
     .padding(20)
+  }
+
+  // 倒计时控制
+  private startCountdown() {
+    if (this.countdown > 0) return;
+
+    this.countdown = 120;
+    this.timerId = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown -= 1;
+      } else {
+        clearInterval(this.timerId);
+      }
+    }, 1000);
+  }
+
+  // 验证码校验
+  private confirmVerificationCode(): boolean {
+    // TODO: 实际应调用服务端验证，临时模拟验证码为123456
+    return this.verificationCode === "123456";
   }
 
   private async handleRegistration() {

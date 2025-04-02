@@ -23,6 +23,61 @@ struct ForgetPassword {
     }
   }
 
+
+  build() {
+    Column({ space: 10 }) {
+      TextInput({ placeholder: $r("app.string.forgetUserName") })
+        .type(InputType.USER_NAME)
+        .width('100%')
+        .onChange(value => this.UserName = value)
+
+      Row() {
+        TextInput({ placeholder: $r("app.string.forgetPhone") })
+          .type(InputType.PhoneNumber)
+          .layoutWeight(1)
+          .onChange(value => this.PhoneNumber = value)
+
+        Button(this.countdown > 0 ? `${this.countdown}秒后重试` : $r("app.string.SendVerificationCode"))
+          .width(100)
+          .flexShrink(0)
+          .enabled(this.countdown === 0)
+          .fontColor($r("app.color.write"))
+          .backgroundColor($r("app.color.starBlue"))
+          .onClick(() => {
+            this.startCountdown();
+            // TODO: 实际发送验证码逻辑
+            console.log("发送验证码到:", this.PhoneNumber);
+          })
+      }
+      .width('100%')
+
+      TextInput({ placeholder: $r("app.string.inputVerificationCode") })
+        .type(InputType.Number)
+        .width('100%')
+        .onChange(value => this.VerificationCode = value)
+
+      TextInput({ placeholder: $r("app.string.newPassword") })
+        .type(InputType.Password)
+        .width('100%')
+        .onChange(value => this.Password = value)
+
+      TextInput({ placeholder: $r("app.string.confirmNewPassword") })
+        .type(InputType.Password)
+        .width('100%')
+        .onChange(value => this.ConfirmPassword = value)
+
+      Button($r("app.string.confirmChange"))
+        .width('100%')
+        .fontColor($r("app.color.write"))
+        .backgroundColor($r("app.color.starBlue"))
+        .onClick(async () => {
+          await this.modifyPassword();
+        })
+    }
+    .width('100%')
+    .padding({ left: 30, top: 100, right: 50 })
+  }
+
   // 倒计时控制
   private startCountdown() {
     if (this.countdown > 0) return;
@@ -117,63 +172,10 @@ struct ForgetPassword {
     return true;
   }
 
-  build() {
-    Column({ space: 10 }) {
-      TextInput({ placeholder: $r("app.string.forgetUserName") })
-        .type(InputType.USER_NAME)
-        .width('100%')
-        .onChange(value => this.UserName = value)
-
-      Row() {
-        TextInput({ placeholder: $r("app.string.forgetPhone") })
-          .type(InputType.PhoneNumber)
-          .layoutWeight(1)
-          .onChange(value => this.PhoneNumber = value)
-
-        Button(this.countdown > 0 ? `${this.countdown}秒后重试` : $r("app.string.SendVerificationCode"))
-          .width(100)
-          .flexShrink(0)
-          .enabled(this.countdown === 0)
-          .fontColor($r("app.color.write"))
-          .backgroundColor($r("app.color.starBlue"))
-          .onClick(() => {
-            this.startCountdown();
-            // TODO: 实际发送验证码逻辑
-            console.log("发送验证码到:", this.PhoneNumber);
-          })
-      }
-      .width('100%')
-
-      TextInput({ placeholder: $r("app.string.inputVerificationCode") })
-        .type(InputType.Number)
-        .width('100%')
-        .onChange(value => this.VerificationCode = value)
-
-      TextInput({ placeholder: $r("app.string.newPassword") })
-        .type(InputType.Password)
-        .width('100%')
-        .onChange(value => this.Password = value)
-
-      TextInput({ placeholder: $r("app.string.confirmNewPassword") })
-        .type(InputType.Password)
-        .width('100%')
-        .onChange(value => this.ConfirmPassword = value)
-
-      Button($r("app.string.confirmChange"))
-        .width('100%')
-        .fontColor($r("app.color.write"))
-        .backgroundColor($r("app.color.starBlue"))
-        .onClick(async () => {
-          await this.modifyPassword();
-        })
-    }
-    .width('100%')
-    .padding({ left: 30, top: 100, right: 50 })
-  }
-
   aboutToDisappear() {
     if (this.timerId !== -1) {
       clearInterval(this.timerId);
     }
   }
+
 }

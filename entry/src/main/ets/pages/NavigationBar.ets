@@ -4,14 +4,14 @@ import {frontPage} from '../component/TabsComponent'
 import {parkingPage} from '../component/Parking'
 import {UserCenterPage} from '../component/UserCenter'
 import { bundleManager } from '@kit.AbilityKit';
-import App from '@system.app';
+
 
 @Entry
 @Component
 @Preview
 struct BottomTab {//底部导航栏
   @State message: string = '智能停车场管理系统 '; //目前还不知道这条语句有什么用，或许以后有大用？
-  @State appid:string = ""
+  // @State appid:string = ""
   @State currentIndex: number = 0;//动态标识当前页
   private  tabsController: TabsController = new TabsController();
 

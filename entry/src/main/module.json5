@@ -17,7 +17,7 @@
         "name": "EntryAbility",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
-        "icon": "$media:ico",
+        "icon": "$media:icoImage",  //这里说的是图标要用json格式声明前景和背景，不让你直接用图片，那我问你，你用不用？
         "label": "$string:EntryAbility_label",
         "startWindowIcon": "$media:icoBack", //启动应用后的都一个图片，还不能删
         "startWindowBackground": "$color:write",

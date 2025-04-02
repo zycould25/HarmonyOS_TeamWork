@@ -1,5 +1,15 @@
 // 在这个文件里面写停车的界面嗷
 import { Banner } from '../model/Banner'
+import {GetNearParkingLot} from './getNearParkingLot'
+
+// 地点数据类型
+interface Place {
+  id: number
+  name: string
+  description: string
+  image: Resource
+}
+
 
 
 @Preview
@@ -52,8 +62,11 @@ export struct frontPage {
         this.currentIndex = index
       })
       .height(240) // 总高度计算：200图片 + 20上下padding + 20指示器
+      //todayToGo()
+      GetNearParkingLot()
+        .height('100%')
+        .margin(20)
 
-      // 以下可以继续添加其他停车场界面组件
     }
     .width('100%')
     .height('100%')
@@ -61,21 +74,86 @@ export struct frontPage {
   }
 }
 
+
 @Component
-struct todayToGo{
+struct todayToGo {
+  @State isDialogVisible: boolean = false
+  @State selectedPlace: Place | null = null
+
+  // 模拟地点数据
+  private places: Place[] = [
+    {
+      id: 1,
+      name: '杭州西湖',
+      description: '中国十大风景名胜之一，三面云山一面城的景观格局',
+      image: $r("app.media.west_lake")
+    },
+    {
+      id: 2,
+      name: '敦煌莫高窟',
+      description: '世界上现存规模最大、内容最丰富的佛教艺术圣地',
+      image: $r("app.media.mogao_caves")
+    }
+  ]
+
   build() {
-    Column({space:10}){
-      Row({space:8}){
-        Button()
+    Column({ space: 10 }) {
+      Row({ space: 8 }) {
+        Button("随机出发去一个地方")
           .width(120)
           .flexShrink(0)
           .fontColor($r("app.color.write"))
           .backgroundColor($r("app.color.starBlue"))
-          .onClick(()=>{
-
-        })
+          .onClick(() => {
+            // 随机选择地点
+            const randomIndex = Math.floor(Math.random() * this.places.length)
+            this.selectedPlace = this.places[randomIndex]
+            this.isDialogVisible = true
+          })
       }.width('100%')
-    }
+      .justifyContent(FlexAlign.Center)
 
+      // 弹窗层
+      if (this.isDialogVisible) {
+        Column() {
+          Column({ space: 20 }) {
+            // 图片
+            Image(this.selectedPlace?.image)
+              .height(200)
+              .width('100%')
+              .objectFit(ImageFit.Cover)
+              .borderRadius({ topLeft: 16, topRight: 16 })
+            // 文字内容
+            Column({ space: 12 }) {
+              Text(this.selectedPlace?.name)
+                .fontSize(24)
+                .fontColor(Color.Black)
+
+              Text(this.selectedPlace?.description)
+                .fontSize(16)
+                .fontColor('#666666')
+                .lineHeight(24)
+            }
+            .padding({ left: 20, right: 20 })
+            // 关闭按钮
+            Button('关闭')
+              .width(120)
+              .fontColor($r("app.color.write"))
+              .backgroundColor($r("app.color.starBlue"))
+              .onClick(() => this.isDialogVisible = false)
+          }
+          .width('80%')
+          .backgroundColor($r("app.color.starBlue"))
+          .borderRadius(16)
+          .clip(true)
+          .align(Alignment.Center) // 使用对齐方式代替绝对定位
+          .margin({ left: 24, right: 24 }) // 添加边距防止贴边
+        }
+        .width('100%')
+        .height('100%')
+        .position({ x: 0, y: 0 }) // 使用坐标定位代替 Fixed
+      }
+    }
   }
 }
+

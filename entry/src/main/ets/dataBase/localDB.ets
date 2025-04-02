@@ -42,7 +42,8 @@ export class UserDBManager {
     try {
       // 获取或创建数据库连接
       this.store = await relationalStore.getRdbStore(getContext(), this.config);
-      // 创建用户表（如果不存在）
+
+      // 创建核心用户表（如果不存在）
       await this.store.executeSql(`
         CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,9 +74,15 @@ export class UserDBManager {
    * @param user 用户对象
    * @returns Promise<number> 返回插入的用户ID（失败返回-1）
    */
-  async addUser(user: User): Promise<number> { //十分的方便啊，你只需要传入一个我定义好了的User实例就可以将新用户加入数据库
+  async addUser(user: User): Promise<number> {//十分的方便啊，你只需要传入一个我定义好了的User实例就可以将新用户加入数据库
     try {
-      // 构建插入数据
+      // 1. 前置校验：检查用户名是否已存在
+      const existingUser = await this.getUserByName(user.userName);
+      if (existingUser !== null) {
+        promptAction.showToast({ message: '用户名已被使用' });
+        return -1; // 提前终止，避免插入
+      }
+      // 2. 构建插入数据
       const values: relationalStore.ValuesBucket = {
         userName: user.userName,
         passWord: user.passWord,
@@ -83,17 +90,31 @@ export class UserDBManager {
         score: user.score,
         profile: user.profile
       };
-      // 执行插入操作
+      // 3. 执行插入
       const insertId = await this.store.insert('users', values);
-      console.log('User add success')
-      //promptAction.showToast({ message: '用户添加成功' });
+      promptAction.showToast({ message: '用户添加成功' });
       return insertId;
     } catch (e) {
-      //promptAction.showToast({ message: '用户添加失败' });
+      // 4. 处理唯一性约束异常（防止并发冲突）
+      if (e.code === 201) { // 201 是鸿蒙的唯一性错误码
+        promptAction.showToast({ message: '用户名已被使用' });
+      } else {
+        promptAction.showToast({ message: '用户添加失败' });
+      }
       console.error('Add user error:', JSON.stringify(e));
       return -1;
     }
   }
+
+/*常见系统错误码参考
+  201	BUSINESS_ERROR_USER_CANCEL	用户主动取消操作	无需处理，记录日志即可
+  401	BUSINESS_ERROR_PARAM_CHECK	参数错误（如无效的context）	检查传入参数合法性
+  801	BUSINESS_ERROR_HARDWARE_UNSUPPORTED	设备不支持该功能	提示用户或隐藏相关功能入口
+  12100003	ERROR_PERMISSION_DENIED	权限被拒绝	引导用户前往设置页授权
+*/
+
+
+
 
   /**
    * 删除用户（根据用户名）
@@ -105,6 +126,7 @@ export class UserDBManager {
       // 构建查询条件
       const predicates = new relationalStore.RdbPredicates('users');
       predicates.equalTo('userName', userName);
+
       // 执行删除并获取影响行数
       const rows = await this.store.delete(predicates);
       if (rows > 0) {
@@ -129,12 +151,13 @@ export class UserDBManager {
       // 构建查询条件
       const predicates = new relationalStore.RdbPredicates('users');
       predicates.equalTo('userName', user.userName);
+
       // 构建更新字段（不更新用户名）
       const values: relationalStore.ValuesBucket = {
         passWord: user.passWord,
         phoneNumber: user.phoneNumber,
         profile: user.profile,
-        score: user.score
+        score: user.score  // 更新积分
       };
 
       const rows = await this.store.update(values, predicates);
@@ -165,13 +188,14 @@ export class UserDBManager {
         ['userName', 'passWord', 'phoneNumber', 'score', 'profile']);
 
       if (result.rowCount <= 0) return null;
+
       // 读取第一条结果
       result.goToFirstRow();
       return new User(
         result.getString(result.getColumnIndex('userName')),
         result.getString(result.getColumnIndex('passWord')),
         result.getString(result.getColumnIndex('phoneNumber')),
-        result.getDouble(result.getColumnIndex('score')),
+        result.getDouble(result.getColumnIndex('score')), // 读取积分
         result.getString(result.getColumnIndex('profile'))
       );
     } catch (e) {
@@ -188,8 +212,10 @@ export class UserDBManager {
     const users: User[] = [];
     try {
       const predicates = new relationalStore.RdbPredicates('users');
-      const result = await this.store.query(predicates,                    // 查询所有记录
+      // 查询所有记录
+      const result = await this.store.query(predicates,
         ['userName', 'passWord', 'phoneNumber', 'score', 'profile']);
+
       if (result.rowCount <= 0) return users;
 
       // 遍历结果集

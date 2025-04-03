@@ -26,12 +26,25 @@
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
         }
+      },
+      {
+        "name": "fusu",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.cer",
+          "storePassword": "0000001BF22345B3D326458D57A6424048AA2F968C1DCCFDA97EFB4E5D182419CDBBCF48124189FC480AEE",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B673E68F09BB14086D3F226176826F4A000E299C99B902358C051D0676FAD50E952A827448D847A",
+          "profile": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.p12"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "1240P",
+        "signingConfig": "fusu",
         //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",

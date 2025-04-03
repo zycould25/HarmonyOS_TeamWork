@@ -13,7 +13,7 @@ export class CarClass {
     parkTime: number,
     leftTime?: number,
     owner: string = "未知车主",
-    ratePerHour: number = 5 // 默认 5 元/小时
+    ratePerHour: number = 5
   ) {
     if (parkTime <= 0) {
       throw new Error("停车时间必须是有效的时间戳");

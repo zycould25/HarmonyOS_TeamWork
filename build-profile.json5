@@ -27,17 +27,17 @@
           "storeFile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
         }
       },
-      {
+      {//手动签名，提供地图服务
         "name": "fusu",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.cer",
-          "storePassword": "0000001BF22345B3D326458D57A6424048AA2F968C1DCCFDA97EFB4E5D182419CDBBCF48124189FC480AEE",
+          "storePassword": "00000020EC3BEE57CA1F0C0A3D1BDCDBD69D37633534A2F82D1F71625177279FF304776BB2A7AF560540D043613C0E90",
+          "certpath": "D:/Harmony/Signature/地图服务.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B673E68F09BB14086D3F226176826F4A000E299C99B902358C051D0676FAD50E952A827448D847A",
-          "profile": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.p7b",
+          "keyPassword": "00000020A3F90431F37929386709B4BC5F3D48A99E37ECB24BD955914B6D7BC78B1498898BE93C34EA4F893189DDAAEE",
+          "profile": "D:/Harmony/Signature/MapServiseDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\86188\\.ohos\\config\\fusu_HarmonyOS_TeamWork_lERgkV7H0ZkkSUw3A2XyufzVAosJTwFqWqbaHMyfoEQ=.p12"
+          "storeFile": "D:/Harmony/Signature/.p12"
         }
       }
     ],

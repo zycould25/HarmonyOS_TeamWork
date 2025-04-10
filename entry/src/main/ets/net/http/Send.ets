@@ -11,7 +11,7 @@ export function HttpUtil(rul:string, method:http.RequestMethod, requestData:stri
 
 
   httpRequest.request(rul,{
-    method:method, //请求的方式
+    method:http.RequestMethod.POST,
     header:{
       //前端请求后端所需要的数据格式
       "Content-type":"application/json"
@@ -32,4 +32,5 @@ export function HttpUtil(rul:string, method:http.RequestMethod, requestData:stri
     }
 
   })
+
 }

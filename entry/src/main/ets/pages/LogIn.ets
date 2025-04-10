@@ -1,6 +1,9 @@
 import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
 import { UserDBManager } from '../dataBase/localDB'
+import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+import { common } from '@kit.AbilityKit';
+import { buffer } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -81,19 +84,38 @@ struct LogIn {
   }
 
   // 处理登录逻辑
+  private async  fileWrite(isLoggedIn: string) {
+    let context = getContext(this) as common.UIAbilityContext;
+    let filesDir = context.filesDir;
+    let file: fs.File | null = null;
+    try {
+      // 使用 TRUNC 模式清空文件内容后再写入
+      file = fs.openSync(filesDir + '/isUserLoggIn.txt',
+        fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE | fs.OpenMode.TRUNC);
+      let writeLen = fs.writeSync(file.fd, isLoggedIn);
+      console.info("写入长度: " + writeLen);
+    } catch (e) {
+      console.error("写入文件错误: ", e);
+    } finally {
+      // 确保关闭文件描述符
+      if (file !== null) {
+        fs.closeSync(file.fd);
+      }
+    }
+  }
 
   private async handleLogin() {
     if (!this.validateInput()) return;
-
+    // 获取应用文件路径
     try {
       if (!this.dbManager) return;
       const user = await this.dbManager.getUserByName(this.username);
-
       if (user?.passWord === this.password) {
         // 保存登录状态和用户信息
         AppStorage.setOrCreate('isLoggedIn', true);
         AppStorage.setOrCreate('currentUser', user);
         await this.redirectToMainPage();
+        await this.fileWrite("true");
       } else {
         promptAction.showToast({ message: $r("app.string.wrongPassword") });
       }
@@ -127,4 +149,5 @@ struct LogIn {
       promptAction.showToast({ message: $r("app.string.navigationError") });
     }
   }
+
 }

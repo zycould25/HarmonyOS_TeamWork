@@ -1,7 +1,6 @@
 import { MapComponent, mapCommon, map } from '@kit.MapKit';
 import { AsyncCallback } from '@kit.BasicServicesKit';
 
-@Entry
 @Component
 export struct HuaweiMapDemo {
   private TAG = "HuaweiMapDemo";

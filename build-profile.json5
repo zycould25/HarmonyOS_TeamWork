@@ -18,13 +18,13 @@
         "name": "1240P",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.cer",
-          "storePassword": "0000001BFDEAB0209DFE8AF608FD4FCC01079661A54D162011A7C19981D653ADD92B7D0BD9782AE2AC5298",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BE95939F5D7FB87E0DEE97AD8FD3E5CD8EED74D2501ABF181D31905B1DF8C1B26A4B210187AA81A",
-          "profile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p7b",
+          "storePassword": "00000020F524D5A18FA133A0255FB8FF95860320BEEB15BC6279DA2481FD4B3E82FBF40CEAD387D16C1673DA46965137",
+          "certpath": "C:/Users/halfz/.ohos/config/PM/fusu_mapSever.cer",
+          "keyAlias": "fusu_mapSever",
+          "keyPassword": "000000204B2CF83BF925681A3BAB898A72D24DA7EEAE341A6596806494C5D65B2E5F5235F29949D2A1EDD4AFA6E00E6B",
+          "profile": "C:/Users/halfz/.ohos/config/PM/fusu_mapSeverDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
+          "storeFile": "C:/Users/halfz/.ohos/config/PM/mapServe.p12"
         }
       },
       {
@@ -44,7 +44,7 @@
     "products": [
       {
         "name": "default",
-        "signingConfig": "fusu",
+        "signingConfig": "1240P",
         //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",

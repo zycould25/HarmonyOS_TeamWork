@@ -27,24 +27,24 @@
           "storeFile": "C:\\Users\\halfz\\.ohos\\config\\1240P_ParkManagement_YAG_yT8Myig-T_4iFwOR7dCFIBVeoKn47tPK4gdduH8=.p12"
         }
       },
-      {//手动签名，提供地图服务
+      {
         "name": "fusu",
         "type": "HarmonyOS",
         "material": {
-          "storePassword": "00000020EC3BEE57CA1F0C0A3D1BDCDBD69D37633534A2F82D1F71625177279FF304776BB2A7AF560540D043613C0E90",
-          "certpath": "D:/Harmony/Signature/地图服务.cer",
-          "keyAlias": "debugKey",
-          "keyPassword": "00000020A3F90431F37929386709B4BC5F3D48A99E37ECB24BD955914B6D7BC78B1498898BE93C34EA4F893189DDAAEE",
-          "profile": "D:/Harmony/Signature/MapServiseDebug.p7b",
+          "storePassword": "00000020594861DDB868357C286373B0FD9BABC309653880D9CB966B2EB4CB9DC1DBCBA9D56C6B2FDDE9BD30278FD62E",
+          "certpath": "D:/Harmony/Signature/fusu_mapSever.cer",
+          "keyAlias": "fusu_mapSever",
+          "keyPassword": "00000020BE89CB42C17B9809774F7F5899DB4B9C87CA82CC82DDE4AD2F0596EF61F1BE07829C8A0D6839FF1E3550C1F0",
+          "profile": "D:/Harmony/Signature/fusu_mapSeverDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "D:/Harmony/Signature/.p12"
+          "storeFile": "D:/Harmony/Signature/mapServe.p12"
         }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "1240P",
+        "signingConfig": "fusu",
         //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",

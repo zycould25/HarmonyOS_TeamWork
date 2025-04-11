@@ -1,7 +1,7 @@
 
 import {hilog} from  '@kit.PerformanceAnalysisKit'
 import {frontPage} from '../component/TabsComponent'
-import {parkingPage} from '../component/Parking'
+import {HuaweiMapDemo} from '../component/Parking'
 import {UserCenterPage} from '../component/UserCenter'
 import { bundleManager } from '@kit.AbilityKit';
 
@@ -43,7 +43,7 @@ struct BottomTab {//底部导航栏
         if (index == 0){
           frontPage()
         } else if(index == 1){
-          parkingPage()
+          HuaweiMapDemo()
         } else if(index ==2 ){
           UserCenterPage()
         }

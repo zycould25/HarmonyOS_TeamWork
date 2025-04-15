@@ -200,6 +200,11 @@
     {
       "name": "Harmony_navi_permission_reason",
       "value": "高德地图"
+    },
+    {
+      "name": "huaweiAccountLogIn",
+      "value": "华为账号一键登录"
     }
+
   ]
 }

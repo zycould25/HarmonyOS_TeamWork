@@ -47,7 +47,19 @@ struct LogIn {
         .onClick(async () => {
           await this.handleLogin();
         })
+      //华为账号一键登录
+      Column({ space: 10 }) {
 
+        Button($r('app.string.huaweiAccountLogIn'))
+          .width('100%')
+          .fontColor($r("app.color.write"))
+          .backgroundColor($r("app.color.starBlue")) // 建议单独定义华为品牌色
+          .onClick(() => {
+            //TODO
+          })
+      }
+      .width('100%')
+      .margin({ top: 20 })
 
         TextInput({placeholder:"测试用：删除用户"})
           .onChange(value=>this.deleteUser = value)
@@ -83,26 +95,6 @@ struct LogIn {
     .padding({ left: 30, top: 100, right: 50 })
   }
 
-  // 处理登录逻辑
-  private async  fileWrite(isLoggedIn: string) {
-    let context = getContext(this) as common.UIAbilityContext;
-    let filesDir = context.filesDir;
-    let file: fs.File | null = null;
-    try {
-      // 使用 TRUNC 模式清空文件内容后再写入
-      file = fs.openSync(filesDir + '/isUserLoggIn.txt',
-        fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE | fs.OpenMode.TRUNC);
-      let writeLen = fs.writeSync(file.fd, isLoggedIn);
-      console.info("写入长度: " + writeLen);
-    } catch (e) {
-      console.error("写入文件错误: ", e);
-    } finally {
-      // 确保关闭文件描述符
-      if (file !== null) {
-        fs.closeSync(file.fd);
-      }
-    }
-  }
 
   private async handleLogin() {
     if (!this.validateInput()) return;
@@ -115,7 +107,7 @@ struct LogIn {
         AppStorage.setOrCreate('isLoggedIn', true);
         AppStorage.setOrCreate('currentUser', user);
         await this.redirectToMainPage();
-        await this.fileWrite("true");
+
       } else {
         promptAction.showToast({ message: $r("app.string.wrongPassword") });
       }

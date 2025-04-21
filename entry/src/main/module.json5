@@ -50,39 +50,7 @@
     ],
     "requestPermissions": [
       {
-        "name": "ohos.permission.APPROXIMATELY_LOCATION",
-        "reason": "$string:Harmony_navi_permission_reason",
-        "usedScene": {
-          "when": "always"
-        }
-      },
-      {
-        "name": "ohos.permission.LOCATION",
-        "reason": "$string:Harmony_navi_permission_reason",
-        "usedScene": {
-          "when": "always"
-        }
-      },
-      {
-        "name": "ohos.permission.LOCATION_IN_BACKGROUND",
-        "reason": "$string:Harmony_navi_permission_reason",
-        "usedScene": {
-          "when": "always"
-        }
-      },
-      {
-        "name": "ohos.permission.INTERNET",
-        "reason": "$string:Harmony_navi_permission_reason",
-        "usedScene": {
-          "when": "always"
-        }
-      },
-      {
-        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
-        "reason": "$string:Harmony_navi_permission_reason",
-        "usedScene": {
-          "when": "always"
-        }
+        "name": "ohos.permission.INTERNET"
       }
     ]
   }

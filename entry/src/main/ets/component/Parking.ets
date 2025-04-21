@@ -1,6 +1,7 @@
 import { MapComponent, mapCommon, map } from '@kit.MapKit';
 import { AsyncCallback } from '@kit.BasicServicesKit';
 
+@Entry
 @Component
 export struct HuaweiMapDemo {
   private TAG = "HuaweiMapDemo";
@@ -9,8 +10,14 @@ export struct HuaweiMapDemo {
   private mapController?: map.MapComponentController;
   private mapEventManager?: map.MapEventManager;
 
+  private currentTypeIndex: number = 0;  // 当前地图类型索引
+  private mapTypes: mapCommon.MapType[] = [
+    mapCommon.MapType.STANDARD,
+    mapCommon.MapType.TERRAIN,
+    mapCommon.MapType.NONE
+  ];
+
   aboutToAppear(): void {
-    // 地图初始化参数，设置地图中心点坐标及层级
     this.mapOptions = {
       position: {
         target: {
@@ -18,34 +25,39 @@ export struct HuaweiMapDemo {
           longitude: 116.4
         },
         zoom: 10
-      }
+      },
+      mapType: this.mapTypes[this.currentTypeIndex],
+      myLocationControlsEnabled: true,
+      dayNightMode: mapCommon.DayNightMode.AUTO
     };
 
-    // 地图初始化的回调
     this.callback = async (err, mapController) => {
       if (!err) {
-        // 获取地图的控制器类，用来操作地图
         this.mapController = mapController;
-        this.mapEventManager = this.mapController.getEventManager();
-        let callback = () => {
+        this.mapEventManager = mapController.getEventManager();
+        this.mapEventManager.on("mapLoad", () => {
           console.info(this.TAG, `on-mapLoad`);
-        }
-        this.mapEventManager.on("mapLoad", callback);
+        });
       }
     };
   }
 
-  // 页面每次显示时触发一次，包括路由过程、应用进入前台等场景，仅@Entry装饰的自定义组件生效
+  changeMapType(): void {
+    this.currentTypeIndex = (this.currentTypeIndex + 1) % this.mapTypes.length;
+    const nextType = this.mapTypes[this.currentTypeIndex];
+    if (this.mapController) {
+      this.mapController.setMapType(nextType);
+      console.info(this.TAG, `地图类型切换为：${nextType}`);
+    }
+  }
+
   onPageShow(): void {
-    // 将地图切换到前台
     if (this.mapController) {
       this.mapController.show();
     }
   }
 
-  // 页面每次隐藏时触发一次，包括路由过程、应用进入后台等场景，仅@Entry装饰的自定义组件生效
   onPageHide(): void {
-    // 将地图切换到后台
     if (this.mapController) {
       this.mapController.hide();
     }
@@ -53,8 +65,22 @@ export struct HuaweiMapDemo {
 
   build() {
     Stack() {
-      // 调用MapComponent组件初始化地图
-      MapComponent({ mapOptions: this.mapOptions, mapCallback: this.callback }).width('100%').height('100%');
-    }.height('100%')
+      // 地图组件
+      MapComponent({ mapOptions: this.mapOptions, mapCallback: this.callback })
+        .width('100%')
+        .height('100%');
+
+      // 使用Stack配合Align实现定位按钮
+      Column() {
+        Button("切换地图类型")
+          .onClick(() => this.changeMapType())
+          .width(200)
+          .height(50)
+      }
+      .align(Alignment.BottomEnd)
+      .margin({ bottom: 20 })
+    }
+    .width('100%')
+    .height('100%')
   }
 }

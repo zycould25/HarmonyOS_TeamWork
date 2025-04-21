@@ -3,8 +3,8 @@
     "name": "entry",
     "type": "entry",
     "description": "$string:module_desc",
-    "mainElement": "EntryAbility",
-    "deviceTypes": [
+    "mainElement": "EntryAbility",//默认启动模块
+    "deviceTypes": [//适用设备
       "phone",
       "tablet",
       "2in1"
@@ -16,11 +16,12 @@
       {
         "name": "EntryAbility",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "backgroundModes": ["location"],//添加后台定位模式(24/4/22 from fusu)
         "description": "$string:EntryAbility_desc",
         "icon": "$media:icoImage",  //这里说的是图标要用json格式声明前景和背景，不让你直接用图片，那我问你，你用不用？
         "label": "$string:EntryAbility_label",
         "startWindowIcon": "$media:icoBack", //启动应用后的都一个图片，还不能删
-        "startWindowBackground": "$color:write",
+        "startWindowBackground": "$color:white",
         "exported": true,
         "skills": [
           {
@@ -48,9 +49,42 @@
         ],
       }
     ],
-    "requestPermissions": [
+    "requestPermissions": [//需求的权限，***关键中的关键(25/4/22 from fusu)
       {
-        "name": "ohos.permission.INTERNET"
+        "name": "ohos.permission.LOCATION",//精确的位置信息访问服务(25/4/22 from fusu)
+        "reason": "$string:location_permission",//允许设备在前台运行的时候访问位置服务(25/4/22 from fusu)
+        "usedScene": {
+          "abilities": ["EntryAbility"],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.LOCATION_IN_BACKGROUND",
+        "reason": "$string:location_background",//允许设备在后台访问数据(25/4/22 from fusu)
+        "usedScene": {
+          "abilities": ["EntryAbility"],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+        "reason": "$string:running_background",//保持后台运行以此来实现后台获取位置信息权限（25/4/22 from fusu）
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+        "reason": "$string:get_network_info",//获取网络状态的权限（25/4/22 from fusu）
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "always"
+        }
       }
     ]
   }

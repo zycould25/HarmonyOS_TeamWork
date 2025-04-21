@@ -204,6 +204,22 @@
     {
       "name": "huaweiAccountLogIn",
       "value": "华为账号一键登录"
+    },
+    {
+      "name": "location_permission",
+      "value": "Allow the app to obtain location information when running in the foreground during location scenarios"
+    },
+    {
+      "name": "location_background",
+      "value":"Allow the app to get location information in the background"
+    },
+    {
+      "name": "running_background",
+      "value": "Allows the app to perform long-running tasks in the background to get location information"
+    },
+    {
+      "name": "get_network_info",
+      "value": "Allows the app to get network connection information of the device"
     }
 
   ]

@@ -24,7 +24,6 @@
       "name": "ForgetPassword",
       "value": "忘记密码"
     },
-
     {
       "name": "GoToRegister",
       "value": "注册账号"
@@ -137,8 +136,6 @@
       "name": "confirmChange",
       "value": "确认修改"
     },
-
-
     {
       "name": "databaseError",
       "value": "数据库错误"
@@ -187,8 +184,6 @@
       "name": "logout",
       "value": "退出登录"
     },
-
-
     {
       "name": "login_now",
       "value": "立即登录"
@@ -211,7 +206,7 @@
     },
     {
       "name": "location_background",
-      "value":"Allow the app to get location information in the background"
+      "value": "Allow the app to get location information in the background"
     },
     {
       "name": "running_background",
@@ -220,7 +215,14 @@
     {
       "name": "get_network_info",
       "value": "Allows the app to get network connection information of the device"
+    },
+    {
+      "name": "LocationInter_desc",
+      "value": "description"
+    },
+    {
+      "name": "LocationInter_label",
+      "value": "label"
     }
-
   ]
 }

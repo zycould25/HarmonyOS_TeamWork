@@ -60,5 +60,8 @@
       "name": "divider",
       "value": "#10aec2"
     }
-  ]
+  ,{
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    }]
 }

@@ -1,12 +1,13 @@
 
 import {hilog} from  '@kit.PerformanceAnalysisKit'
 import {frontPage} from '../component/TabsComponent'
-import {HuaweiMapDemo} from '../component/Parking'
 import {UserCenterPage} from '../component/UserCenter'
 import { bundleManager } from '@kit.AbilityKit';
+import { parkingPage } from '../component/Parking_Before';
+import {Parking} from '../component/Parking'
 
 
-@Entry
+@Entry//主界面，添加@Entry（25/4/22 from fusu）
 @Component
 @Preview
 struct BottomTab {//底部导航栏
@@ -43,7 +44,7 @@ struct BottomTab {//底部导航栏
         if (index == 0){
           frontPage()
         } else if(index == 1){
-          HuaweiMapDemo()
+          Parking()
         } else if(index ==2 ){
           UserCenterPage()
         }
@@ -68,6 +69,7 @@ struct BottomTab {//底部导航栏
       this.tabContentBuilder("我的",
         2,$r('app.media.activePeople'),$r('app.media.people'))
     }
+    .scrollable(false)//禁用滑动切换导航栏，给用户更好的体验（25/4/22 from fusu）
     .width('100%')
     .backgroundColor('#F34F5')
     .barHeight(52)
@@ -77,12 +79,4 @@ struct BottomTab {//底部导航栏
       this.currentIndex = targetIndex;
     })
   }
-  // aboutToAppear(): void {
-  //   let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_SIGNATURE_INFO;
-  //   let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag)
-  //   let appId = bundleInfo.signatureInfo.appId;
-  //   this.appid=appId
-  //   console.log(appId)
-  // }
-
 }

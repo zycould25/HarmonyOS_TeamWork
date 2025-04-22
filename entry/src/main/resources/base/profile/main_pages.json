@@ -1,6 +1,6 @@
 {
   "src": [
-    "pages/NavigationBar",
+    "pages/BottomTab",
     "pages/LogIn",
     "pages/RegisterPage",
     "pages/ForgetPassword"

@@ -1,9 +1,11 @@
 import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
 import { UserDBManager } from '../dataBase/localDB'
-import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
-import { common } from '@kit.AbilityKit';
-import { buffer } from '@kit.ArkTS';
+
+import { HttpUtil } from '../net/http/Send';
+import { http } from '@kit.NetworkKit';
+
+
 
 @Entry
 @Component
@@ -98,23 +100,28 @@ struct LogIn {
 
   private async handleLogin() {
     if (!this.validateInput()) return;
-    // 获取应用文件路径
-    try {
-      if (!this.dbManager) return;
-      const user = await this.dbManager.getUserByName(this.username);
-      if (user?.passWord === this.password) {
-        // 保存登录状态和用户信息
-        AppStorage.setOrCreate('isLoggedIn', true);
-        AppStorage.setOrCreate('currentUser', user);
-        await this.redirectToMainPage();
 
-      } else {
-        promptAction.showToast({ message: $r("app.string.wrongPassword") });
+    const loginPayload = JSON.stringify({
+      "userName": this.username,
+      "passWord": this.password,
+    });
+
+    HttpUtil(
+      "http://8.155.47.127:8080/api/harmonyAddUser/login",
+      http.RequestMethod.POST,
+      loginPayload,
+      async (success, result) => {
+        if (success) {
+          // 登录成功，保存状态和用户信息
+          AppStorage.setOrCreate('isLoggedIn', true);
+          AppStorage.setOrCreate('currentUser', result); // result 包含 id, userName, score 等
+          await this.redirectToMainPage();
+        } else {
+          // 登录失败，提示用户
+          promptAction.showToast({ message: result.message || $r("app.string.loginFailed") });
+        }
       }
-    } catch (e) {
-      console.error("Login error:", e);
-      promptAction.showToast({ message: $r("app.string.loginFailed") });
-    }
+    );
   }
 
   // 输入验证
@@ -135,7 +142,7 @@ struct LogIn {
   // 跳转到主页面
   private async redirectToMainPage() {
     try {
-      await router.pushUrl({ url: 'pages/NavigationBar' });
+      await router.pushUrl({ url: 'pages/BottomTab' });
     } catch (e) {
       console.error("Navigation failed:", e);
       promptAction.showToast({ message: $r("app.string.navigationError") });

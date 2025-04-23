@@ -18,13 +18,13 @@
         "name": "1240P",
         "type": "HarmonyOS",
         "material": {
-          "storePassword": "00000020F524D5A18FA133A0255FB8FF95860320BEEB15BC6279DA2481FD4B3E82FBF40CEAD387D16C1673DA46965137",
-          "certpath": "C:/Users/halfz/.ohos/config/PM/fusu_mapSever.cer",
-          "keyAlias": "fusu_mapSever",
-          "keyPassword": "000000204B2CF83BF925681A3BAB898A72D24DA7EEAE341A6596806494C5D65B2E5F5235F29949D2A1EDD4AFA6E00E6B",
-          "profile": "C:/Users/halfz/.ohos/config/PM/fusu_mapSeverDebug.p7b",
+          "storePassword": "000000201B00A08775BA9F1A5C9F2DBCA3D53D61A2B3F76E2E55DAB27F91C70733F895287CC8004B52518CFF991B058F",
+          "certpath": "G:/Key/Signature/fusu_services_certificate.cer",
+          "keyAlias": "fusu_service",
+          "keyPassword": "0000002014058E8B24A662033A9CEAFF7D3FF12C0E75B0B909955E0AD351FB960D8E4A910F6E213C7F588659EED9362A",
+          "profile": "G:/Key/Signature/fusu_services_ProfileDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:/Users/halfz/.ohos/config/PM/mapServe.p12"
+          "storeFile": "G:/Key/Signature/fusu_services_key.p12"
         }
       },
       {
@@ -39,12 +39,25 @@
           "signAlg": "SHA256withECDSA",
           "storeFile": "D:/Harmony/Signature/fusu_services_key.p12"
         }
+      },
+      {
+        "name": "7500F",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "000000203B7536ACE539B0D59938E5FF1D200BAB66543089C58D420AE705CA4B010B92D098707FED63DF77A12B59536D",
+          "certpath": "G:/Key/Signature/fusu_services_certificate.cer",
+          "keyAlias": "fusu_services",
+          "keyPassword": "000000206C2CF6F32F07B90236F36937CF4864065902BB2B3880514B3C58479625FD1193A0D08E75B5AE54E166F35F36",
+          "profile": "G:/Key/Signature/fusu_services_ProfileDebug.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "G:/Key/Signature/fusu_services_key.p12"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "fusu",
+        "signingConfig": "7500F",
         //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",

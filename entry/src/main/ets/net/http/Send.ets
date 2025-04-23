@@ -1,36 +1,48 @@
-import {http} from '@kit.NetworkKit';
+import { http } from '@kit.NetworkKit';
 
+interface ResponseData {
+  id?: number;
+  userName?: string;
+  score?: number;
+  message?: string;
+}
 
-export function HttpUtil(rul:string, method:http.RequestMethod, requestData:string){
-  const httpRequest = http.createHttp();//新建一个对象
+export function HttpUtil(
+  rul: string,
+  method: http.RequestMethod,
+  requestData: string,
+  callback?: (success: boolean, result: ResponseData) => void
+): void {
+  const httpRequest = http.createHttp();
 
-  //监听头
-  httpRequest.on('headersReceive',(header)=>{
-    console.info('header:'+JSON.stringify(header))
-  })
+  httpRequest.on('headersReceive', (header) => {
+    console.info('header:' + JSON.stringify(header));
+  });
 
-
-  httpRequest.request(rul,{
-    method:http.RequestMethod.POST,
-    header:{
-      //前端请求后端所需要的数据格式
-      "Content-type":"application/json"
+  httpRequest.request(rul, {
+    method: method,
+    header: {
+      "Content-type": "application/json"
     },
-    extraData:requestData, //设置请求要传递给后端的数据
-    connectTimeout:6000, //超时
-    readTimeout:10000,
+    extraData: requestData,
+    connectTimeout: 6000,
+    readTimeout: 10000,
+  }, (error: Error, data: http.HttpResponse) => {
+    let result: ResponseData = {};
 
-  },(error:Error,data:http.HttpResponse)=>{
-    //没有内容则是代表了成功，否则就说明有问题
-    if(!error){
-      console.log(JSON.stringify(data))
-      httpRequest.destroy()
+    if (!error && data.responseCode === 200) {
+      if (typeof data.result === 'object') {
+        result = data.result as ResponseData;
+      } else {
+        result = { message: String(data.result) };
+      }
+      callback?.(true, result);
     } else {
-      httpRequest.off('headersReceive')
-      console.log(JSON.stringify(error))
-      httpRequest.destroy()
+      result = { message: error?.message || "请求失败" };
+      callback?.(false, result);
     }
 
-  })
-
+    httpRequest.off('headersReceive');
+    httpRequest.destroy();
+  });
 }

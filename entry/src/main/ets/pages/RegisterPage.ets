@@ -2,6 +2,8 @@ import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
 import User from '../model/Users'
 import { UserDBManager } from '../dataBase/localDB'
+import { HttpUtil } from '../net/http/Send';
+import { http } from '@kit.NetworkKit';
 
 @Entry
 @Component
@@ -13,6 +15,9 @@ struct RegisterPage {
   @State verificationCode: string = "";
   @State countdown: number = 0;
   @State private dbManager: UserDBManager | null = null;
+
+  URL:string = "http://8.155.47.127:8080/api/harmonyAddUser";
+
   private timerId: number = -1;
 
   async aboutToAppear() {
@@ -75,6 +80,7 @@ struct RegisterPage {
         .width('100%')
         .onClick(async () => {
           await this.handleRegistration();
+
         })
 
       Button($r("app.string.backToLogin"))
@@ -132,6 +138,14 @@ struct RegisterPage {
         0,  // 初始积分设为0
         ""
       );
+
+      HttpUtil(this.URL, http.RequestMethod.POST, JSON.stringify({
+        userName:  this.username,
+        passWord:  this.password,
+        phoneNumber: this.phoneNumber,
+        profile: "",
+        score: 0
+      }));
 
       const userId = await this.dbManager.addUser(newUser);
       if (userId !== -1) {

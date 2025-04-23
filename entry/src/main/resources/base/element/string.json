@@ -201,6 +201,10 @@
       "value": "华为账号一键登录"
     },
     {
+      "name": "http_post",
+      "value": "send http request"
+    },
+    {
       "name": "location_permission",
       "value": "Allow the app to obtain location information when running in the foreground during location scenarios"
     },

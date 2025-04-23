@@ -57,6 +57,17 @@
       }
     ],
     "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "$string:http_post",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "always"
+        }
+      },
+
       //需求的权限，***关键中的关键(25/4/22 from fusu)
       {
         "name": "ohos.permission.LOCATION",

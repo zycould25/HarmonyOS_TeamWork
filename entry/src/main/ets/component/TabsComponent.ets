@@ -64,8 +64,8 @@ export struct frontPage {
       .height(240) // 总高度计算：200图片 + 20上下padding + 20指示器
       //todayToGo()
       GetNearParkingLot()
-        .height('100%')
-        .margin(20)
+        .layoutWeight(1)  // 使用layoutWeight替代固定高度
+        .margin({ left: 20, right: 20, bottom: 20 })  // 确保留出足够空间
 
     }
     .width('100%')

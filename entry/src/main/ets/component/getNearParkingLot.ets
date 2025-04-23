@@ -1,86 +1,71 @@
 // ParkingLot.ets
+import { http } from '@kit.NetworkKit'
+import promptAction from '@ohos.promptAction'
+
 // 停车场数据类型定义
 interface ParkingLot {
-  id: string
+  id: number
   name: string
-  distance: number // 单位：米
-  price: number    // 单位：元/小时
+  location: number
+  price: number
   availableSpots: number
   totalSpots: number
   isOpen: boolean
 }
 
-// 安全的手动模拟数据
-function generateMockData(): ParkingLot[] {
-  return [
+// 网络请求函数
+function fetchParkingLots(callback: (success: boolean, data: ParkingLot[] | string) => void): void {
+  const httpRequest = http.createHttp()
+  httpRequest.request(
+    "http://8.155.47.127:8080/api/parking/list",
     {
-      id: '1',
-      name: '世纪广场停车场',
-      distance: 450,
-      price: 8,
-      availableSpots: 23,
-      totalSpots: 150,
-      isOpen: true
+      method: http.RequestMethod.GET,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      connectTimeout: 5000,
+      readTimeout: 10000
     },
-    {
-      id: '2',
-      name: '智慧大厦地下车库',
-      distance: 780,
-      price: 12,
-      availableSpots: 5,
-      totalSpots: 200,
-      isOpen: true
-    },
-    {
-      id: '3',
-      name: '市民中心停车场',
-      distance: 1200,
-      price: 6,
-      availableSpots: 0,
-      totalSpots: 300,
-      isOpen: false
-    },
-    {
-      id: '4',
-      name: '国际会展中心停车场',
-      distance: 1500,
-      price: 10,
-      availableSpots: 15,
-      totalSpots: 180,
-      isOpen: true
-    },
-    {
-      id: '5',
-      name: '金融中心停车场',
-      distance: 2000,
-      price: 15,
-      availableSpots: 8,
-      totalSpots: 200,
-      isOpen: true
+    (error: Error, data: http.HttpResponse) => {
+      httpRequest.destroy()
+      if (!error && data.responseCode === 200) {
+        let result: ParkingLot[] = []
+        if (typeof data.result === 'string') {
+          try {
+            result = JSON.parse(data.result) as ParkingLot[]
+          } catch (e) {
+            callback(false, '解析数据失败')
+            return
+          }
+        } else {
+          result = data.result as ParkingLot[]
+        }
+        callback(true, result)
+      } else {
+        callback(false, error?.message || '请求失败')
+      }
     }
-  ];
+  )
 }
 
-// 列表项组件
+// 单项组件
 @Component
 struct ParkingLotItem {
   @Prop item: ParkingLot
 
   build() {
     Column({ space: 8 }) {
-      // 顶部信息行
       Row() {
         Text(this.item.name)
           .fontSize(18)
           .fontColor(Color.Black)
           .flexGrow(1)
 
-        Text(`${this.item.distance}m`)
+        Text(`${this.item.location}m`)
           .fontSize(14)
           .fontColor('#666')
       }
 
-      // 中部状态行
       Row() {
         Text(`¥${this.item.price}/小时`)
           .fontColor('#FF5722')
@@ -91,7 +76,6 @@ struct ParkingLotItem {
       }
       .margin({ top: 8 })
 
-      // 底部状态栏
       Row() {
         if (this.item.isOpen) {
           Text('营业中')
@@ -120,35 +104,47 @@ struct ParkingLotItem {
   }
 }
 
+// 页面组件
 @Component
 export struct GetNearParkingLot {
-  @State parkingLots: ParkingLot[] = generateMockData()
+  @State parkingLots: ParkingLot[] = []
+
+  aboutToAppear() {
+    fetchParkingLots((success, data) => {
+      if (success) {
+        this.parkingLots = data as ParkingLot[]
+      } else {
+        promptAction.showToast({ message: `获取数据失败：${data}` })
+      }
+    })
+  }
 
   build() {
     Column() {
-      // 列表标题
       Text("附近停车场")
         .fontSize(24)
         .fontColor(Color.Black)
-        .margin({ top: 2, bottom: 20 })
+        .margin({ top: 2, bottom: 16 })
 
-      // 修改后的列表部分
-      List({ space: 2 }) {
-        ForEach(
-          this.parkingLots,
-          (item: ParkingLot) => {
-            ListItem() {
-              ParkingLotItem({ item: item })
-            }
-            .border({ width: 0.5, color: '#EEEEEE' })
-          },
-          (item: ParkingLot) => item.id
-        )
+      Scroll() {
+        List({ space: 2 }) {
+          ForEach(
+            this.parkingLots,
+            (item: ParkingLot) => {
+              ListItem() {
+                ParkingLotItem({ item: item })
+              }
+              .border({ width: 0.5, color: '#EEEEEE' })
+            },
+            (item: ParkingLot) => `${item.id}`
+          )
+        }
+        .width('100%')
       }
-      .width('100%')
-      .height('85%')
       .scrollBar(BarState.Auto)
       .edgeEffect(EdgeEffect.Spring)
+      .scrollable(ScrollDirection.Vertical)
+      .layoutWeight(1)
     }
     .width('100%')
     .height('100%')

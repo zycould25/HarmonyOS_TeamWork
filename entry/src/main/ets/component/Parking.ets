@@ -56,10 +56,10 @@ export struct Parking{
           } else {
             result = data.result as ParkingLot[]
           }
-          
+
           // 按距离排序，距离最近的排在前面
           result.sort((a, b) => a.location - b.location)
-          
+
           this.parkingLots = result
           console.info(`获取到${result.length}个停车场数据，已按距离排序`)
         } else {
@@ -72,7 +72,7 @@ export struct Parking{
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       HuaweiMapDemo()
-      
+
       Column() {
         // 滑动指示条
         Row() {
@@ -85,14 +85,14 @@ export struct Parking{
         .width('100%')
         .justifyContent(FlexAlign.Center)
         .padding({ top: 10, bottom: 6 })
-        
+
         // Search box
         Row() {
           Image($r('app.media.search'))
             .width(24)
             .height(24)
             .margin({ left: 12 })
-          
+
           TextInput({ placeholder: '搜索停车场' })
             .placeholderFont({ size: 16 })
             .padding({ left: 8 })
@@ -105,14 +105,14 @@ export struct Parking{
         .borderRadius(25)
         .backgroundColor('#F5F5F5')
         .margin({ top: 10, bottom: 16 })
-        
+
         // Location recommendations
         Column() {
           Row() {
             Text('附近停车场')
               .fontSize(18)
               .fontWeight(FontWeight.Bold)
-            
+
             if (!this.isLoading && this.parkingLots.length > 0) {
               Text(`(按距离排序)`)
                 .fontSize(14)
@@ -122,7 +122,7 @@ export struct Parking{
           }
           .alignSelf(ItemAlign.Start)
           .margin({ left: 16, top: 8, bottom: 16 })
-            
+
           if (this.isLoading) {
             Row() {
               LoadingProgress()
@@ -173,7 +173,7 @@ export struct Parking{
             let deltaY = event.offsetY;
             // 计算新的位置比例
             let newPosition = this.cardPosition - deltaY / this.getScreenHeight();
-            
+
             // 限制在最小和最大高度之间
             if (newPosition >= this.minCardHeight && newPosition <= this.maxCardHeight) {
               this.cardPosition = newPosition;
@@ -194,7 +194,7 @@ export struct Parking{
     .width('100%')
     .height('100%')
   }
-  
+
   private getScreenHeight(): number {
     let screenHeight = 1000; // 默认值
     try {
@@ -205,7 +205,7 @@ export struct Parking{
     }
     return screenHeight;
   }
-  
+
   @Builder
   private buildParkingItem(name: string, distance: string, price: string, availableSpots: number, totalSpots: number, isOpen: boolean) {
     Row() {
@@ -222,7 +222,7 @@ export struct Parking{
             .fontSize(14)
             .fontColor(availableSpots > 0 ? '#4CAF50' : '#F44336')
             .margin({ top: 4 })
-            
+
           if (isOpen) {
             Text('营业中')
               .fontSize(12)
@@ -244,7 +244,7 @@ export struct Parking{
       }
       .alignItems(HorizontalAlign.Start)
       .layoutWeight(1)
-      
+
       Text(price)
         .fontSize(16)
         .fontColor('#FF6B00')

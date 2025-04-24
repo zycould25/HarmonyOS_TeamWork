@@ -227,6 +227,10 @@
     {
       "name": "LocationInter_label",
       "value": "label"
+    },
+    {
+      "name": "internet_switch",
+      "value": "网络未连接，请检查网络设置"
     }
   ]
 }

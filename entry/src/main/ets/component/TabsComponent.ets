@@ -23,50 +23,66 @@ export struct frontPage {
   ];
 
   @State currentIndex: number = 0  // 当前显示索引
+  @State cardHeight: number = 0.6  // 卡片高度占比，默认显示60%
+  private minCardHeight: number = 0.4  // 最小高度
+  private maxCardHeight: number = 0.8  // 最大高度
   // Swiper控制器
   private swiperController: SwiperController = new SwiperController()
 
   build() {
     Column() { // 使用Column作为根容器
-      // 轮播图区域
-      Text(this.bannerList[this.currentIndex]?.description || '')
-        .fontSize(16)
-        .fontColor('#333')
-        .margin({ top: 8, bottom: 1 })
-        .width('90%')
-        .textAlign(TextAlign.Center)
-        .maxLines(1)
-        .textOverflow({ overflow: TextOverflow.Ellipsis })
+      Scroll() {
+        Column() {
+          // 轮播图区域
+          Text(this.bannerList[this.currentIndex]?.description || '')
+            .fontSize(16)
+            .fontColor('#333')
+            .margin({ top: 8, bottom: 1 })
+            .width('90%')
+            .textAlign(TextAlign.Center)
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
 
-      Swiper(this.swiperController) {
-        ForEach(this.bannerList, (item: Banner) => {
-          Column() {
-            Image(item.imageSrc)
-              .objectFit(ImageFit.Contain)
-              .width('100%')
-              .height(200)
-              .padding({ left: 10, right: 10, top: 10 })
-              .borderRadius(16)
+          Swiper(this.swiperController) {
+            ForEach(this.bannerList, (item: Banner) => {
+              Column() {
+                Image(item.imageSrc)
+                  .objectFit(ImageFit.Contain)
+                  .width('100%')
+                  .height(200)
+                  .padding({ left: 10, right: 10, top: 10 })
+                  .borderRadius(16)
+              }
+            }, (item: Banner) => item.id)
           }
-        }, (item: Banner) => item.id)
-      }
-      .margin({ bottom: 12 })
-      .autoPlay(true)
-      .interval(3000) // 3秒切换
-      .loop(true)
-      .indicator(new DotIndicator()
-        .color('#55bb8a')
-        .selectedColor('#f8d86a')
-      )
-      .onChange((index: number) => {
-        this.currentIndex = index
-      })
-      .height(240) // 总高度计算：200图片 + 20上下padding + 20指示器
-      //todayToGo()
-      GetNearParkingLot()
-        .layoutWeight(1)  // 使用layoutWeight替代固定高度
-        .margin({ left: 20, right: 20, bottom: 20 })  // 确保留出足够空间
+          .margin({ bottom: 12 })
+          .autoPlay(true)
+          .interval(3000) // 3秒切换
+          .loop(true)
+          .indicator(new DotIndicator()
+            .color('#55bb8a')
+            .selectedColor('#f8d86a')
+          )
+          .onChange((index: number) => {
+            this.currentIndex = index
+          })
+          .height(240) // 总高度计算：200图片 + 20上下padding + 20指示器
 
+          GetNearParkingLot()
+          .width('100%')
+          .height(600) // 固定高度，内部元素通过比例缩放
+          .margin({ bottom: 20 })
+
+          // 预留底部空间
+          Column()
+            .height(20)
+        }
+        .width('100%')
+      }
+      .scrollBar(BarState.Auto)
+      .edgeEffect(EdgeEffect.Spring)
+      .width('100%')
+      .layoutWeight(1)
     }
     .width('100%')
     .height('100%')

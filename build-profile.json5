@@ -15,19 +15,6 @@
         }
       },
       {
-        "name": "1240P",
-        "type": "HarmonyOS",
-        "material": {
-          "storePassword": "000000201B00A08775BA9F1A5C9F2DBCA3D53D61A2B3F76E2E55DAB27F91C70733F895287CC8004B52518CFF991B058F",
-          "certpath": "G:/Key/Signature/fusu_services_certificate.cer",
-          "keyAlias": "fusu_service",
-          "keyPassword": "0000002014058E8B24A662033A9CEAFF7D3FF12C0E75B0B909955E0AD351FB960D8E4A910F6E213C7F588659EED9362A",
-          "profile": "G:/Key/Signature/fusu_services_ProfileDebug.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "G:/Key/Signature/fusu_services_key.p12"
-        }
-      },
-      {
         "name": "fusu",
         "type": "HarmonyOS",
         "material": {
@@ -52,12 +39,25 @@
           "signAlg": "SHA256withECDSA",
           "storeFile": "G:/Key/Signature/fusu_services_key.p12"
         }
+      },
+      {
+        "name": "1240P",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "000000209A1EF2D6E8E2BFEE56E6D1A3D70FF040BA3D083F86D9D8E8AC96CBD94E50AF0710DEE9FD2EEFF07CA5743063",
+          "certpath": "C:/Users/halfz/.ohos/config/PM/fusu_mapSever.cer",
+          "keyAlias": "fusu_mapSever",
+          "keyPassword": "000000205EFECE27C264FB09ACC0E762262DC223CFEA760074B799A69BC2944E45D2F8BAF7CA245457E1A1271A3E8872",
+          "profile": "C:/Users/halfz/.ohos/config/PM/fusu_mapSeverDebug.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/halfz/.ohos/config/PM/mapServe.p12"
+        }
       }
     ],
     "products": [
       {
         "name": "default",
-        "signingConfig": "7500F",
+        "signingConfig": "1240P",
         //这里啊，因为我目前在用mac mini在做测试，所以改成了我的Mac的signingConfigs，我的电脑的话改成n1240P ，其他人的电脑改为自己的相应的signingConfigs
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
